@@ -1,16 +1,15 @@
-__author__ = 'Grzegorz'
-
-from agarGame.AgarLogic.AgarBoard import AgarBoard
-
-import agarGame.AgarLogic.AgarMainGame
+from AgarLogic.AgarBoard import AgarBoard
+import AgarLogic.AgarMainGame
 
 if __name__ == "__main__":
     print("Hellooo from main")
-    
+
     board = AgarBoard()
 
-    game = agarGame.AgarLogic.AgarMainGame.AgarMainGame(board)
-    game.makeRound()
+    game = AgarLogic.AgarMainGame.AgarMainGame(board)
+
+    for i in xrange(200):
+        game.makeRound()
 
 
 

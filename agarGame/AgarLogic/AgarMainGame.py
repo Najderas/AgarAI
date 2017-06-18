@@ -1,9 +1,7 @@
 __author__ = 'Grzegorz'
 
 import math
-
-from .AgarPlayer import AgarPlayer
-from .AgarBoard import AgarBoard
+import matplotlib.pyplot as plt
 
 class AgarMainGame():
     def __init__(self, agarBoard):
@@ -13,6 +11,14 @@ class AgarMainGame():
         self.sqrt05 = math.sqrt(0.5)
 
         self.agarBoard.populateBoardWithPlayers()
+
+        x = [player.x for player in self.agarBoard.players]
+        y = [player.y for player in self.agarBoard.players]
+        self.fig, self.ax = plt.subplots()
+        self.points, = self.ax.plot(x, y, marker='o', linestyle='None')
+        print(x, y)
+        self.ax.set_xlim(0, 1000)
+        self.ax.set_ylim(0, 1000)
 
     def calculateCellMovementDistancePerFrame(self, player):
         return self.maxDistancePerFrame * self.sqrt05 / math.sqrt(0.5 * player.mass)
@@ -49,11 +55,17 @@ class AgarMainGame():
         for player in self.agarBoard.players:
             self.movePlayer(player)
 
+
+
     def makeRound(self):
         self.askPlayersForDecisions()
         for i in range(self.playersDecideEveryXRounds):
             self.movePlayers()
 
-
+        x = [player.x for player in self.agarBoard.players]
+        y = [player.y for player in self.agarBoard.players]
+        print(x, y)
+        self.points.set_data(x, y)
+        plt.pause(0.1)
 
 
