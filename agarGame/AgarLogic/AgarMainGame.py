@@ -9,16 +9,19 @@ class AgarMainGame():
         self.agarBoard = agarBoard
         self.maxDistancePerFrame = 2.
         self.sqrt05 = math.sqrt(0.5)
+        self.displayPlot = True
 
         self.agarBoard.populateBoardWithPlayers()
 
-        x = [player.x for player in self.agarBoard.players]
-        y = [player.y for player in self.agarBoard.players]
-        self.fig, self.ax = plt.subplots()
-        self.points, = self.ax.plot(x, y, marker='o', linestyle='None')
-        print(x, y)
-        self.ax.set_xlim(0, 1000)
-        self.ax.set_ylim(0, 1000)
+        # initialize plot
+        if self.displayPlot:
+            x = [player.x for player in self.agarBoard.players]
+            y = [player.y for player in self.agarBoard.players]
+            self.fig, self.ax = plt.subplots()
+            self.points, = self.ax.plot(x, y, marker='o', linestyle='None')
+            print(x, y)
+            self.ax.set_xlim(0, 1000)
+            self.ax.set_ylim(0, 1000)
 
     def calculateCellMovementDistancePerFrame(self, player):
         return self.maxDistancePerFrame * self.sqrt05 / math.sqrt(0.5 * player.mass)
@@ -50,22 +53,24 @@ class AgarMainGame():
                 else:
                     self.eatingTime(player, neighbour)
 
-
     def movePlayers(self):
         for player in self.agarBoard.players:
             self.movePlayer(player)
 
-
-
-    def makeRound(self):
-        self.askPlayersForDecisions()
-        for i in range(self.playersDecideEveryXRounds):
-            self.movePlayers()
-
+    def plotBoard(self):
         x = [player.x for player in self.agarBoard.players]
         y = [player.y for player in self.agarBoard.players]
         print(x, y)
         self.points.set_data(x, y)
         plt.pause(0.1)
+
+    def makeRound(self):
+        self.askPlayersForDecisions()
+        for i in range(self.playersDecideEveryXRounds):
+            self.movePlayers()
+        if self.displayPlot:
+            self.plotBoard()
+
+
 
 

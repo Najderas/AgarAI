@@ -7,7 +7,7 @@ class AgarPlayer:
     def __init__(self, pos_x=-1, pos_y=-1):
         self.x = pos_x
         self.y = pos_y
-        self.mass = 2
+        self.mass = 2 + random.randint(0, 5)
         self.radius = 1
         self.movement_vector = [0, 0]
         self.negativeRevardForBeingEaten = -500
@@ -25,8 +25,9 @@ class AgarPlayer:
     def makeDecision(self, neighbours):
 
         # example random decision
-        self.movement_vector[0] = random.random()
-        self.movement_vector[1] = math.sqrt(1 - self.movement_vector[0]*self.movement_vector[0])
+        self.movement_vector[0] = random.random()*2 - 1
+        # self.movement_vector[1] = math.sqrt(1 - self.movement_vector[0]*self.movement_vector[0])
+        self.movement_vector[1] = random.random()*2 - 1
 
     # def setX(self, x):
     #     """ should be called from AgarBoard """     #TODO: surely?
