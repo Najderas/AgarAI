@@ -5,11 +5,11 @@ from pygame.locals import *
 pygame.init()
 
 # utworzenie okna
-window = pygame.display.set_mode((468, 60))
+window = pygame.display.set_mode((468, 160))
 
 def input(events):
    for event in events:
-      if event.type == "QUIT":
+      if event.type == QUIT:
          sys.exit(0)
       else:
          print(event)
