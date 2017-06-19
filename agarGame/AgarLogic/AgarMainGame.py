@@ -75,7 +75,7 @@ class AgarMainGame():
     def plotBoard(self, print_info=False):
         x = [player.x for player in self.agarBoard.players]
         y = [player.y for player in self.agarBoard.players]
-        sizes = [player.mass for player in self.agarBoard.players]
+        sizes = [player.radius * 40 for player in self.agarBoard.players]
         numberOfPlayers = len(self.agarBoard.players)
         # colors = ['red' if i < numberOfPlayers/2 else 'white' for i in xrange(numberOfPlayers)]
         # markers = ['.' if i < 10 else 'o' for i in xrange(len(self.agarBoard.players))]
@@ -87,7 +87,7 @@ class AgarMainGame():
 
         x = [player.x for player in self.agarBoard.getIntelligentPlayers()]
         y = [player.y for player in self.agarBoard.getIntelligentPlayers()]
-        sizes = [player.mass for player in self.agarBoard.getIntelligentPlayers()]
+        sizes = [player.radius * 40 for player in self.agarBoard.getIntelligentPlayers()]
         self.ax.scatter(x, y, s=sizes, c='red')
 
         self.ax.set_xlim(0, self.agarBoard.size_x)
