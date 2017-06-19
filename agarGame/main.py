@@ -14,6 +14,7 @@ if __name__ == "__main__":
 
     game.plotBoard(print_info=True)
 
+    print(filter(lambda x: x.isActive(), board.players))
     print("Firstly there were " + str(board.defaultPlayerNumber) + " players.")
     print("Players left: " + str(len(filter(lambda x: x.isActive(), board.players) ) ) )
     print("mases: ", sorted([pl.mass for pl in filter(lambda x: x.isActive(), board.players)], reverse=True) )

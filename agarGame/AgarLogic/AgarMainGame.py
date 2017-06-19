@@ -47,6 +47,8 @@ class AgarMainGame():
         # calculate direction
         dir_vector = player.movement_vector
         dir_vector_len = math.sqrt(dir_vector[0]*dir_vector[0] + dir_vector[1]*dir_vector[1])
+        if dir_vector_len == 0:
+            return
         move_distance = self.calculateCellMovementDistancePerFrame(player)
         d = move_distance/dir_vector_len
         # move player

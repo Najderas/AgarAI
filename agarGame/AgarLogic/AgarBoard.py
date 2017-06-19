@@ -2,6 +2,7 @@ __author__ = 'Grzegorz'
 
 import logging
 from .AgarPlayer import AgarPlayer
+from .AgarPlayer2 import AgarPlayer2
 import random
 
 class AgarBoard:
@@ -139,7 +140,14 @@ class AgarBoard:
     def populateBoardWithPlayers(self, number = -1):
         if number<=0:
             number = self.defaultPlayerNumber
-        for i in range(number):
+
+        for i in range(number/2):
+            player = AgarPlayer2()
+            # random place
+            self.randomizePosition(player)
+            self.addPlayer(player)
+
+        for i in range(number/2):
             player = AgarPlayer()
             # random place
             self.randomizePosition(player)
