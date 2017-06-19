@@ -28,7 +28,7 @@ class AgarPlayer2(AgarPlayer):
             self.movement_vector[0] += ((max_l - (neighbour.x-self.x)) if (neighbour.x-self.x) > 0 else ((-1)*max_l - (neighbour.x-self.x))) * (-1 if neighbour.mass > self.mass else 1)
             self.movement_vector[1] += ((max_l - (neighbour.y-self.y)) if (neighbour.y-self.y) > 0 else ((-1)*max_l - (neighbour.y-self.y))) * (-1 if neighbour.mass > self.mass else 1)
 
-        if len(neighbours):
+        if len(neighbours) == 0:
             self.movement_vector[0] += random.random()*2 - 1
             self.movement_vector[1] += random.random()*2 - 1
 

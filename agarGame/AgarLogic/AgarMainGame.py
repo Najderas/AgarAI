@@ -9,7 +9,7 @@ class AgarMainGame():
         self.playersDecideEveryXRounds = 10
         self.maxDistancePerFrame = 2.
         self.displayPlot = True
-        self.plotPauseInterval = 0.01
+        self.plotPauseInterval = 0.1
         #############################
 
         self.sqrt05 = math.sqrt(0.5)
