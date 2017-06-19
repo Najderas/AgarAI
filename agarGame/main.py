@@ -1,7 +1,7 @@
 from AgarLogic.AgarBoard import AgarBoard
 import AgarLogic.AgarMainGame
 
-ROUNDS_NUMBER = 2000
+ROUNDS_NUMBER = 150
 BOARD_SIZE = 300
 
 if __name__ == "__main__":
@@ -10,6 +10,8 @@ if __name__ == "__main__":
     game = AgarLogic.AgarMainGame.AgarMainGame(board)
 
     for i in xrange(ROUNDS_NUMBER):
+        if i%10==0:
+            print("### ROUND"+str(i))
         game.makeRound()
 
     game.plotBoard(print_info=True)
