@@ -21,7 +21,7 @@ class AgarBoard:
         # now call self.bucket_matrix[x][y]
 
         ######### CONSTANTS ##########
-        self.seingRadiusMultiplier = 10
+        self.seingRadiusMultiplier = 30
         self.defaultPlayerNumber = 500
         ###########################
 
@@ -157,7 +157,7 @@ class AgarBoard:
         players = []
         for p in self.players:
             if p.__str__() == "AgarPlayer2":
-                players.add(p)
+                players.append(p)
         return players
 
 

@@ -9,7 +9,7 @@ class AgarMainGame():
         self.playersDecideEveryXRounds = 10
         self.maxDistancePerFrame = 2.
         self.displayPlot = True
-        self.plotPauseInterval = 0.1
+        self.plotPauseInterval = 0.01
         #############################
 
         self.sqrt05 = math.sqrt(0.5)
@@ -62,14 +62,19 @@ class AgarMainGame():
         y = [player.y for player in self.agarBoard.players]
         sizes = [player.mass for player in self.agarBoard.players]
         numberOfPlayers = len(self.agarBoard.players)
-        colors = ['red' if i < numberOfPlayers/2 else 'white' for i in xrange(numberOfPlayers)]
+        # colors = ['red' if i < numberOfPlayers/2 else 'white' for i in xrange(numberOfPlayers)]
         # markers = ['.' if i < 10 else 'o' for i in xrange(len(self.agarBoard.players))]
         # colors[0] = 'red'
         self.ax.cla()
         if print_info:
             print(zip(x, y, sizes))
-        self.ax.scatter(x, y, s=sizes, c=colors)
-        self.ax.scatter(x[:numberOfPlayers/2], y[:numberOfPlayers/2], s=sizes[:numberOfPlayers/2], c='red', marker='*')
+        self.ax.scatter(x, y, s=sizes, c='white')
+
+        x = [player.x for player in self.agarBoard.getIntelligentPlayers()]
+        y = [player.y for player in self.agarBoard.getIntelligentPlayers()]
+        sizes = [player.mass for player in self.agarBoard.getIntelligentPlayers()]
+        self.ax.scatter(x, y, s=sizes, c='red')
+
         self.ax.set_xlim(0, self.agarBoard.size_x)
         self.ax.set_ylim(0, self.agarBoard.size_y)
         plt.pause(self.plotPauseInterval)
