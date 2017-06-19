@@ -18,7 +18,11 @@ class AgarBoard:
         self.players = set()
         self.bucket_matrix = [ [ set() for y in range(self.bucket_matrix_density_y) ] for x in range(self.bucket_matrix_density_x) ]
         # now call self.bucket_matrix[x][y]
+
+        ######### CONSTANTS ##########
         self.seingRadiusMultiplier = 10
+        self.defaultPlayerNumber = 10
+        ###########################
 
     def calculateViewRadius(self, radius):
         return radius*self.seingRadiusMultiplier
@@ -128,7 +132,9 @@ class AgarBoard:
         old_buckets_x_list, old_buckets_y_list = self.getBucketsFromPositionAndRadius(player.x, player.y, player.radius)
         self._removeFromUnusedBucketsAddToNew(player, old_buckets_x_list, old_buckets_y_list, [], [])
 
-    def populateBoardWithPlayers(self, number = 50):
+    def populateBoardWithPlayers(self, number = -1):
+        if number<=0:
+            number = self.defaultPlayerNumber
         for i in range(number):
             player = AgarPlayer()
             # random place

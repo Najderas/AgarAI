@@ -8,8 +8,10 @@ if __name__ == "__main__":
 
     game = AgarLogic.AgarMainGame.AgarMainGame(board)
 
-    for i in xrange(200):
+    for i in xrange(100):
         game.makeRound()
+
+    game.plotBoard(print_info=True)
 
 
 

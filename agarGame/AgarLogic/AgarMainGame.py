@@ -5,12 +5,15 @@ import matplotlib.pyplot as plt
 
 class AgarMainGame():
     def __init__(self, agarBoard):
-        self.playersDecideEveryXRounds = 10
         self.agarBoard = agarBoard
-        self.maxDistancePerFrame = 2.
-        self.sqrt05 = math.sqrt(0.5)
-        self.displayPlot = True
 
+        ######### CONSTANTS #########
+        self.playersDecideEveryXRounds = 10
+        self.maxDistancePerFrame = 2.
+        self.displayPlot = True
+        #########################
+
+        self.sqrt05 = math.sqrt(0.5)
         self.agarBoard.populateBoardWithPlayers()
 
         if self.displayPlot:
@@ -58,12 +61,13 @@ class AgarMainGame():
         for player in self.agarBoard.players:
             self.movePlayer(player)
 
-    def plotBoard(self):
+    def plotBoard(self, print_info=False):
         x = [player.x for player in self.agarBoard.players]
         y = [player.y for player in self.agarBoard.players]
         sizes = [player.mass for player in self.agarBoard.players]
         self.ax.cla()
-        print(zip(x, y, sizes))
+        if print_info:
+            print(zip(x, y, sizes))
         self.ax.scatter(x, y, s=sizes)
         plt.pause(0.1)
 
