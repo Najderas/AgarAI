@@ -1,17 +1,23 @@
 from AgarLogic.AgarBoard import AgarBoard
 import AgarLogic.AgarMainGame
 
+ROUNDS_NUMBER = 200
+BOARD_SIZE = 300
+
 if __name__ == "__main__":
-    print("Hellooo from main")
 
-    board = AgarBoard()
-
+    board = AgarBoard(BOARD_SIZE, BOARD_SIZE)
     game = AgarLogic.AgarMainGame.AgarMainGame(board)
 
-    for i in xrange(100):
+    for i in xrange(ROUNDS_NUMBER):
         game.makeRound()
 
     game.plotBoard(print_info=True)
+
+    print("Firstly there were " + str(board.defaultPlayerNumber) + " players.")
+    print("Players left: " + str(len(filter(lambda x: x.isActive(), board.players) ) ) )
+    print("mases: ", sorted([pl.mass for pl in filter(lambda x: x.isActive(), board.players)], reverse=True) )
+
 
 
 
