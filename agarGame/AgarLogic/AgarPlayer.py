@@ -45,7 +45,7 @@ class AgarPlayer:
     def isColliding(self, another_cell):
         dx = abs(self.x - another_cell.x)
         dy = abs(self.y - another_cell.y)
-        if self.radius + another_cell.radius < math.sqrt(dx*dx + dy*dy):
+        if self.radius + another_cell.radius > math.sqrt(dx*dx + dy*dy):
             if self.logCollisions:
                 print("Cell in ("+ str(self.x) + "," + str(self.y) + ") r=" + str(self.radius) + " collides cell (" + str(another_cell.x) + "," + str(another_cell.y) + ") r=" + str(another_cell.radius) )
             return True
