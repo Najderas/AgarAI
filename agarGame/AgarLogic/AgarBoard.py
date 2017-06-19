@@ -81,6 +81,7 @@ class AgarBoard:
         for bx in buckets_x_list:
             for by in buckets_y_list:
                 neighbours.update(self.bucket_matrix[bx][by])
+        neighbours.discard(player)
         return neighbours
 
     def getNeighboursSeenByPlayer(self, player):
@@ -90,6 +91,7 @@ class AgarBoard:
         for bx in buckets_x_list:
             for by in buckets_y_list:
                 neighbours.update(self.bucket_matrix[bx][by])
+        neighbours.discard(player)
         return neighbours
 
     def movePlayerToPosition(self, player, new_x, new_y):
