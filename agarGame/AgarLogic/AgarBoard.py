@@ -153,7 +153,12 @@ class AgarBoard:
             self.randomizePosition(player)
             self.addPlayer(player)
 
-
+    def getIntelligentPlayers(self):
+        players = []
+        for p in self.players:
+            if p.__str__() == "AgarPlayer2":
+                players.add(p)
+        return players
 
 
 
