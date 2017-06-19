@@ -24,8 +24,8 @@ class AgarMainGame():
             self.fig, self.ax = plt.subplots()
             self.ax.scatter(x, y, s=sizes)
             print(zip(x, y, sizes))
-            self.ax.set_xlim(0, 1000)
-            self.ax.set_ylim(0, 1000)
+            self.ax.set_xlim(0, agarBoard.size_x)
+            self.ax.set_ylim(0, agarBoard.size_y)
 
     def calculateCellMovementDistancePerFrame(self, player):
         return self.maxDistancePerFrame * self.sqrt05 / math.sqrt(0.5 * player.mass)
@@ -38,13 +38,17 @@ class AgarMainGame():
         self.agarBoard.removePlayer(eaten)
         eater.eatenSth(eaten)
         eaten.haveBeenEaten()
-        self.agarBoard.addPlayer(eaten)
+        # self.agarBoard.addPlayer(eaten)
 
     def movePlayer(self, player):
+        if not player.isActive():
+            return
         # damn you python, where are 2d vector calculations??
         # calculate direction
         dir_vector = player.movement_vector
         dir_vector_len = math.sqrt(dir_vector[0]*dir_vector[0] + dir_vector[1]*dir_vector[1])
+        if dir_vector_len == 0:
+            return
         move_distance = self.calculateCellMovementDistancePerFrame(player)
         d = move_distance/dir_vector_len
         # move player
@@ -55,7 +59,7 @@ class AgarMainGame():
                 if player.mass > neighbour.mass:
                     self.eatingTime(player, neighbour)
                 else:
-                    self.eatingTime(player, neighbour)
+                    self.eatingTime(neighbour, player)
 
     def movePlayers(self):
         for player in self.agarBoard.players:

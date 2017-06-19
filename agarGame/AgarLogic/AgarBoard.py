@@ -2,6 +2,7 @@ __author__ = 'Grzegorz'
 
 import logging
 from .AgarPlayer import AgarPlayer
+from .AgarPlayer2 import AgarPlayer2
 import random
 
 class AgarBoard:
@@ -21,7 +22,7 @@ class AgarBoard:
 
         ######### CONSTANTS ##########
         self.seingRadiusMultiplier = 10
-        self.defaultPlayerNumber = 10
+        self.defaultPlayerNumber = 500
         ###########################
 
     def calculateViewRadius(self, radius):
@@ -43,8 +44,8 @@ class AgarBoard:
         returns (buckets_x_list, buckets_y_list) or None
         """
         if x<0 or y<0:
-            self.logger.error("getBucketsFromPosition got incorrect coordinates - x: %s y: %s "%(x,y))
-            return None
+            # self.logger.error("getBucketsFromPosition got incorrect coordinates - x: %s y: %s "%(x,y))
+            return ([], [])
         #this is not proper, because player can be in more than one "zone" (bucket) simultanously
         # bucket_x_ = int( x * self.bucket_matrix_density_x / self.size_x )
         # bucket_y = int( y * self.bucket_matrix_density_y / self.size_y )
@@ -133,11 +134,20 @@ class AgarBoard:
     def removePlayer(self, player):
         old_buckets_x_list, old_buckets_y_list = self.getBucketsFromPositionAndRadius(player.x, player.y, player.radius)
         self._removeFromUnusedBucketsAddToNew(player, old_buckets_x_list, old_buckets_y_list, [], [])
+        player.x=-1
+        player.y=-1
 
     def populateBoardWithPlayers(self, number = -1):
         if number<=0:
             number = self.defaultPlayerNumber
-        for i in range(number):
+
+        for i in range(number/2):
+            player = AgarPlayer2()
+            # random place
+            self.randomizePosition(player)
+            self.addPlayer(player)
+
+        for i in range(number/2):
             player = AgarPlayer()
             # random place
             self.randomizePosition(player)

@@ -27,6 +27,8 @@ class AgarPlayer:
         self.y = -1
 
     def makeDecision(self, neighbours):
+        if not self.isActive():
+            return
 
         # example random decision
         self.movement_vector[0] = random.random()*2 - 1
@@ -46,8 +48,8 @@ class AgarPlayer:
         dx = abs(self.x - another_cell.x)
         dy = abs(self.y - another_cell.y)
         if self.radius + another_cell.radius > math.sqrt(dx*dx + dy*dy):
-            if self.logCollisions:
-                print("Cell in ("+ str(self.x) + "," + str(self.y) + ") r=" + str(self.radius) + " collides cell (" + str(another_cell.x) + "," + str(another_cell.y) + ") r=" + str(another_cell.radius) )
+            # if self.logCollisions:
+            #     print("Cell in ("+ str(int(self.x)) + "," + str(int(self.y)) + ") r=" + str(self.radius) + " collides cell (" + str(int(another_cell.x)) + "," + str(int(another_cell.y)) + ") r=" + str(another_cell.radius) )
             return True
         return False
 
@@ -56,7 +58,7 @@ class AgarPlayer:
 
     def eatenSth(self, cell):
         if self.logCollisions:
-            print("Cell in ("+ str(self.x) + "," + str(self.y) + ") r=" + str(self.radius) + " ate cell (" + str(cell.x) + "," + str(cell.y) + ") r=" + str(cell.radius) )
+            print("("+ str(int(self.x)) + "," + str(int(self.y)) + "):  m=" + str(self.mass) + " r=" + str(self.radius) + " > m=" + str(int(cell.mass)) +  " r=" + str(cell.radius) )
         self.mass += cell.mass
         self.radius = math.sqrt(self.mass/math.pi)
         self.calculateReward(cell.mass)
