@@ -13,13 +13,14 @@ class AgarMainGame():
 
         self.agarBoard.populateBoardWithPlayers()
 
-        # initialize plot
         if self.displayPlot:
             x = [player.x for player in self.agarBoard.players]
             y = [player.y for player in self.agarBoard.players]
+            sizes = [player.mass for player in self.agarBoard.players]
+
             self.fig, self.ax = plt.subplots()
-            self.points, = self.ax.plot(x, y, marker='o', linestyle='None')
-            print(x, y)
+            self.ax.scatter(x, y, s=sizes)
+            print(zip(x, y, sizes))
             self.ax.set_xlim(0, 1000)
             self.ax.set_ylim(0, 1000)
 
@@ -60,8 +61,10 @@ class AgarMainGame():
     def plotBoard(self):
         x = [player.x for player in self.agarBoard.players]
         y = [player.y for player in self.agarBoard.players]
-        print(x, y)
-        self.points.set_data(x, y)
+        sizes = [player.mass for player in self.agarBoard.players]
+        self.ax.cla()
+        print(zip(x, y, sizes))
+        self.ax.scatter(x, y, s=sizes)
         plt.pause(0.1)
 
     def makeRound(self):
