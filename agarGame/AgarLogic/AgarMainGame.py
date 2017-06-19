@@ -65,7 +65,7 @@ class AgarMainGame():
             if player.isColliding(neighbour):
                 if player.mass > neighbour.mass:
                     self.eatingTime(player, neighbour)
-                else:
+                elif player.mass < neighbour.mass:
                     self.eatingTime(neighbour, player)
     def collidePlayers(self):
         for player in self.agarBoard.players:
