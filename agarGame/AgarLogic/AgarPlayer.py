@@ -4,6 +4,9 @@ import random
 import math
 
 class AgarPlayer:
+    def __str__(self):
+        return "AgarPlayer"
+
     def __init__(self, pos_x=-1, pos_y=-1):
         self.x = pos_x
         self.y = pos_y
