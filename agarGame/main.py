@@ -1,7 +1,7 @@
 from AgarLogic.AgarBoard import AgarBoard
 import AgarLogic.AgarMainGame
 
-ROUNDS_NUMBER = 200
+ROUNDS_NUMBER = 2000
 BOARD_SIZE = 300
 
 if __name__ == "__main__":

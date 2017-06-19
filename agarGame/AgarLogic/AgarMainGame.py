@@ -1,5 +1,3 @@
-__author__ = 'Grzegorz'
-
 import math
 import matplotlib.pyplot as plt
 
@@ -11,21 +9,15 @@ class AgarMainGame():
         self.playersDecideEveryXRounds = 10
         self.maxDistancePerFrame = 2.
         self.displayPlot = True
-        #########################
+        self.plotPauseInterval = 0.1
+        #############################
 
         self.sqrt05 = math.sqrt(0.5)
         self.agarBoard.populateBoardWithPlayers()
 
         if self.displayPlot:
-            x = [player.x for player in self.agarBoard.players]
-            y = [player.y for player in self.agarBoard.players]
-            sizes = [player.mass for player in self.agarBoard.players]
-
             self.fig, self.ax = plt.subplots()
-            self.ax.scatter(x, y, s=sizes)
-            print(zip(x, y, sizes))
-            self.ax.set_xlim(0, agarBoard.size_x)
-            self.ax.set_ylim(0, agarBoard.size_y)
+            self.plotBoard()
 
     def calculateCellMovementDistancePerFrame(self, player):
         return self.maxDistancePerFrame * self.sqrt05 / math.sqrt(0.5 * player.mass)
@@ -69,11 +61,18 @@ class AgarMainGame():
         x = [player.x for player in self.agarBoard.players]
         y = [player.y for player in self.agarBoard.players]
         sizes = [player.mass for player in self.agarBoard.players]
+        numberOfPlayers = len(self.agarBoard.players)
+        colors = ['red' if i < numberOfPlayers/2 else 'white' for i in xrange(numberOfPlayers)]
+        # markers = ['.' if i < 10 else 'o' for i in xrange(len(self.agarBoard.players))]
+        # colors[0] = 'red'
         self.ax.cla()
         if print_info:
             print(zip(x, y, sizes))
-        self.ax.scatter(x, y, s=sizes)
-        plt.pause(0.1)
+        self.ax.scatter(x, y, s=sizes, c=colors)
+        self.ax.scatter(x[:numberOfPlayers/2], y[:numberOfPlayers/2], s=sizes[:numberOfPlayers/2], c='red', marker='*')
+        self.ax.set_xlim(0, self.agarBoard.size_x)
+        self.ax.set_ylim(0, self.agarBoard.size_y)
+        plt.pause(self.plotPauseInterval)
 
     def makeRound(self):
         self.askPlayersForDecisions()
