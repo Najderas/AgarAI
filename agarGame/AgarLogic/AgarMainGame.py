@@ -45,17 +45,32 @@ class AgarMainGame():
         d = move_distance/dir_vector_len
         # move player
         self.agarBoard.movePlayerToPosition(player, player.x+dir_vector[0]*d, player.y+dir_vector[1]*d)
+        # # check collisions
+        # for neighbour in self.agarBoard.getNeighboursForPlayer(player):
+        #     if player.isColliding(neighbour):
+        #         if player.mass > neighbour.mass:
+        #             self.eatingTime(player, neighbour)
+        #         else:
+        #             self.eatingTime(neighbour, player)
+
+    def movePlayers(self):
+        for player in self.agarBoard.players:
+            self.movePlayer(player)
+
+    def collidePlayer(self, player):
+        if not player.isActive():
+            return
         # check collisions
         for neighbour in self.agarBoard.getNeighboursForPlayer(player):
             if player.isColliding(neighbour):
                 if player.mass > neighbour.mass:
                     self.eatingTime(player, neighbour)
-                else:
+                elif player.mass < neighbour.mass:
                     self.eatingTime(neighbour, player)
-
-    def movePlayers(self):
+    def collidePlayers(self):
         for player in self.agarBoard.players:
-            self.movePlayer(player)
+            self.collidePlayer(player)
+
 
     def plotBoard(self, print_info=False):
         x = [player.x for player in self.agarBoard.players]
@@ -83,6 +98,7 @@ class AgarMainGame():
         self.askPlayersForDecisions()
         for i in range(self.playersDecideEveryXRounds):
             self.movePlayers()
+            self.collidePlayers()
         if self.displayPlot:
             self.plotBoard()
 
